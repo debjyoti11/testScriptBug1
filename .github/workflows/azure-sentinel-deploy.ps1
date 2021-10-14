@@ -88,8 +88,7 @@ function AttemptDeployment($path, $deploymentName) {
         $currentAttempt ++
         Try 
         {
-
-            New-AzResourceGroupDeployment -ResourceGroupName $ResourceGroupName -TemplateFile $path -workspace $workspaceName -ErrorAction Stop | Out-Host
+            New-AzResourceGroupDeployment -Name  -ResourceGroupName $ResourceGroupName -TemplateFile $path -workspace $workspaceName -ErrorAction Stop | Out-Host
             $isSuccess = $true
         }
         Catch [Exception] 
@@ -133,7 +132,7 @@ function main() {
         Get-ChildItem -Path $Directory -Recurse -Filter *.json |
         ForEach-Object {
             $totalFiles ++
-            $isSuccess = AttemptDeployment $_.FullName $_.Basename 
+            $isSuccess = AttemptDeployment $_.FullName $_.Basename."_".[guid]::NewGuid() 
             if (-not $isSuccess) 
             {
                 $totalFailed++
