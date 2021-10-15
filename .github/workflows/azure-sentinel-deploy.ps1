@@ -77,7 +77,7 @@ function IsRetryable($deploymentName) {
 }
 
 function AttemptDeployment($path, $deploymentName) {
-    Write-Output "Deployment name is $deploymentName"
+    Write-Host "[Info] Deploying $path. Name of the deployment is $deploymentName"
             
     $isValid = IsValidTemplate $path
     if (-not $isValid) {
