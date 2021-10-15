@@ -139,7 +139,7 @@ function main() {
             Write-Output $fileName
             Write-Output $_.FullName
             Write-Output "New id is $randomId"
-            $deploymentName = "$fileName_$randomId"
+            $deploymentName = "$fileName-$randomId"
             Write-Output "Deploymentname name is $deploymentName"
             $isSuccess = AttemptDeployment $_.FullName $deploymentName
             if (-not $isSuccess) 
