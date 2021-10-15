@@ -134,11 +134,8 @@ function main() {
         Get-ChildItem -Path $Directory -Recurse -Filter *.json |
         ForEach-Object {
             $totalFiles ++
-            $randomId = [guid]::NewGuid()
             $fileName = $_.Basename
-            Write-Output $fileName
-            Write-Output $_.FullName
-            Write-Output "New id is $randomId"
+            $randomId = [guid]::NewGuid()
             $deploymentName = "$fileName-$randomId"
             Write-Output "Deploymentname name is $deploymentName"
             $isSuccess = AttemptDeployment $_.FullName $deploymentName
