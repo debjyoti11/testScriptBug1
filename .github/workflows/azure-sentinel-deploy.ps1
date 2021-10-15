@@ -119,9 +119,8 @@ function AttemptDeployment($path, $deploymentName) {
 }
 
 function GenerateDeploymentName($fileName) {
-    $fileName = $fileName -replace '^[-\w\._\(\)]','_'
     $randomId = [guid]::NewGuid()
-    return "$fileName-$randomId"
+    return "Sentinel_Deployment_$randomId"
 }
 
 function main() {
