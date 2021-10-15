@@ -118,6 +118,12 @@ function AttemptDeployment($path, $deploymentName) {
     return $isSuccess
 }
 
+function GenerateDeploymentName($fileName) {
+    $fileName = $fileName.Split([IO.Path]::GetInvalidFileNameChars()) -join '_'
+    $randomId = [guid]::NewGuid()
+    $deploymentName = "$fileName-$randomId"
+}
+
 function main() {
     if ($CloudEnv -ne 'AzureCloud') 
     {
@@ -135,8 +141,7 @@ function main() {
         ForEach-Object {
             $totalFiles ++
             $fileName = $_.Basename
-            $randomId = [guid]::NewGuid()
-            $deploymentName = "$fileName-$randomId"
+
             Write-Output "Deploymentname name is $deploymentName"
             $isSuccess = AttemptDeployment $_.FullName $deploymentName
             if (-not $isSuccess) 
