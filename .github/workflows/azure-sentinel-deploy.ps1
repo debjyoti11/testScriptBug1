@@ -136,6 +136,7 @@ function main() {
             $totalFiles ++
             $randomId = [guid]::NewGuid()
             $fileName = $_.Basename
+            Write-Output $fileName
             Write-Output $_.FullName
             Write-Output "New id is $randomId"
             $deploymentName = "$fileName_$randomId"
