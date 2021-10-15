@@ -119,7 +119,7 @@ function AttemptDeployment($path, $deploymentName) {
 }
 
 function GenerateDeploymentName($fileName) {
-    $fileName = $fileName.Split([IO.Path]::GetInvalidFileNameChars()) -join '_'
+    $fileName = $fileName -replace '^[-\w\._\(\)]+$','_'
     $randomId = [guid]::NewGuid()
     return "$fileName-$randomId"
 }
