@@ -135,10 +135,10 @@ function main() {
         ForEach-Object {
             $totalFiles ++
             $randomId = [guid]::NewGuid()
-            Write-Output $_.Basename
+            $fileName = $_.Basename
             Write-Output $_.FullName
             Write-Output "New id is $randomId"
-            $deploymentName = "$_.Basename_$randomId"
+            $deploymentName = "$fileName_$randomId"
             Write-Output "Deploymentname name is $deploymentName"
             $isSuccess = AttemptDeployment $_.FullName $deploymentName
             if (-not $isSuccess) 
