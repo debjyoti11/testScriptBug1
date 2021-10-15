@@ -121,7 +121,7 @@ function AttemptDeployment($path, $deploymentName) {
 function GenerateDeploymentName($fileName) {
     $fileName = $fileName.Split([IO.Path]::GetInvalidFileNameChars()) -join '_'
     $randomId = [guid]::NewGuid()
-    $deploymentName = "$fileName-$randomId"
+    return "$fileName-$randomId"
 }
 
 function main() {
