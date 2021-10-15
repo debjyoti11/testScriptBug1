@@ -77,6 +77,8 @@ function IsRetryable($deploymentName) {
 }
 
 function AttemptDeployment($path, $deploymentName) {
+    Write-Output "Deployment name is $deploymentName"
+            
     $isValid = IsValidTemplate $path
     if (-not $isValid) {
         return $false
@@ -88,7 +90,7 @@ function AttemptDeployment($path, $deploymentName) {
         $currentAttempt ++
         Try 
         {
-            New-AzResourceGroupDeployment -Name  -ResourceGroupName $ResourceGroupName -TemplateFile $path -workspace $workspaceName -ErrorAction Stop | Out-Host
+            New-AzResourceGroupDeployment -Name $deploymentName -ResourceGroupName $ResourceGroupName -TemplateFile $path -workspace $workspaceName -ErrorAction Stop | Out-Host
             $isSuccess = $true
         }
         Catch [Exception] 
@@ -133,7 +135,9 @@ function main() {
         ForEach-Object {
             $totalFiles ++
             $randomId = [guid]::NewGuid()
+            Write-Output "New id is $randomId"
             $deploymentName = "$_.Basename_$randomId"
+            Write-Output "Deployment name is $deploymentName"
             $isSuccess = AttemptDeployment $_.FullName $_.Basename
             if (-not $isSuccess) 
             {
