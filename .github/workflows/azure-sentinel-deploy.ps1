@@ -140,9 +140,7 @@ function main() {
         Get-ChildItem -Path $Directory -Recurse -Filter *.json |
         ForEach-Object {
             $totalFiles ++
-            $fileName = $_.Basename
-
-            Write-Output "Deploymentname name is $deploymentName"
+            $deploymentName = GenerateDeploymentName($_.Basename)
             $isSuccess = AttemptDeployment $_.FullName $deploymentName
             if (-not $isSuccess) 
             {
