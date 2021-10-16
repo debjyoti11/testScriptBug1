@@ -172,7 +172,7 @@ function main() {
                 Write-Output "[Warning] Skipping deployment for $path. The file contains content that was not selected for deployment. Please add content type to connection if you want this file to be deployed."
                 return
             }
-			$deploymentName = GenerateDeploymentName
+	    $deploymentName = GenerateDeploymentName
             $isSuccess = AttemptDeployment $_.FullName $deploymentName 
             if (-not $isSuccess) 
             {
